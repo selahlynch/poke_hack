@@ -3,25 +3,29 @@
 <title>Deets for {{ poke_type }}!</title>
 <h1>Deets for {{ poke_type }}!</h1>
 
+
 <h2>When attacking, {{ poke_type }} is...</h2>
+
+
 <h3>Super effective against</h3>
-  {% for poke_type in poke_deets['super_effective'] %}
-    <li>{{ poke_type }}</a></li>
+  {% for (ptype, pcoef) in poke_deets['super_effective'].iteritems() %}
+    <li>{{ "{}x damage to {}".format(pcoef, ptype) }}</a></li>
   {% endfor %}
 <h3>Not effective against</h3>
-  {% for poke_type in poke_deets['not_effective'] %}
-    <li>{{ poke_type }}</a></li>
+  {% for (ptype, pcoef) in poke_deets['not_effective'].iteritems() %}
+    <li>{{ "{}x damage to {}".format(pcoef, ptype) }}</a></li>
   {% endfor %}
+
 
 <h2>When defending, {{poke_type}} is...</h2>
 
 <h3>Resistant to</h3>
-  {% for poke_type in poke_deets['resistant_to'] %}
-    <li>{{ poke_type }}</a></li>
+  {% for (ptype, pcoef) in poke_deets['resistant_to'].iteritems() %}
+    <li>{{ "{}x damage from {}".format(pcoef, ptype) }}</a></li>
   {% endfor %}
 <h3>Vulnerable to</h3>
-  {% for poke_type in poke_deets['vulnerable_to'] %}
-    <li>{{ poke_type }}</a></li>
+  {% for (ptype, pcoef) in poke_deets['vulnerable_to'].iteritems() %}
+    <li>{{ "{}x damage from {}".format(pcoef, ptype) }}</a></li>
   {% endfor %}
 
 <h2><a href='/choose_poke_type'>Choose Another Type </a></h2>

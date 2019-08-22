@@ -96,4 +96,8 @@ get_resistant_to('water')
 get_vulnerable_to('water')
 
 #%%
+temp = get_super_effective('fairy')
+for (ptype, pcoef) in temp.iteritems():
+    print("{}x damage to {}".format(pcoef, ptype))
+#%%
 

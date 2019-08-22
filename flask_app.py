@@ -20,13 +20,11 @@ def choose_poke_type():
 @app.route('/poke_type_deets/<poke_type>')
 def poke_type_deets(poke_type):
     #TODO - get the strengths and weaknesses of this poke types
-    poke_deets = {
-        'super_effective':['poop'], #poke_hack.get_super_effective(poke_type)
-        'not_effective':['pee', 'snot'],
-        'resistant_to':['soda', 'fries'],
-        'vulnerable_to':['ketchup']
-    }
-
+    poke_deets = {}
+    poke_deets['super_effective'] = pokemon_types.get_super_effective(poke_type)
+    poke_deets['not_effective'] = pokemon_types.get_not_effective(poke_type)
+    poke_deets['vulnerable_to'] = pokemon_types.get_vulnerable_to(poke_type)
+    poke_deets['resistant_to'] = pokemon_types.get_resistant_to(poke_type)
     return render_template('poke_type_deets.html', poke_type=poke_type, poke_deets=poke_deets)#, poke_deets=poke_deets)
 
 @app.route('/fun_with_data')
