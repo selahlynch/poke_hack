@@ -3,7 +3,7 @@
 # https://flask.palletsprojects.com/en/1.1.x/quickstart/#quickstart
 
 from flask import Flask, render_template
-#import poke_hack
+import pokemon_types
 
 app = Flask(__name__)
 
@@ -31,4 +31,4 @@ def poke_type_deets(poke_type):
 
 @app.route('/fun_with_data')
 def fun_with_data():
-    return "<h1>Coming soon!!</h1>"
+    return "<h1>Coming soon!! </h1>" + pokemon_types.say_hello()
