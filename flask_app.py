@@ -25,6 +25,9 @@ def poke_type_deets(poke_type):
     poke_deets['not_effective'] = pokemon_types.get_not_effective(poke_type)
     poke_deets['vulnerable_to'] = pokemon_types.get_vulnerable_to(poke_type)
     poke_deets['resistant_to'] = pokemon_types.get_resistant_to(poke_type)
+
+    poke_deets['sucks_against'] = pokemon_types.get_sucks_against(poke_type)
+    poke_deets['excells_against'] = pokemon_types.get_excells_against(poke_type)
     return render_template('poke_type_deets.html', poke_type=poke_type, poke_deets=poke_deets)#, poke_deets=poke_deets)
 
 @app.route('/fun_with_data')

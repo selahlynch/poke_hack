@@ -32,30 +32,12 @@ dfti = pd.DataFrame(type_interaction_cells, index=type_names_data, columns=type_
 #columns are defence
 #rows of attack
 
-dfti = dfti.replace({'1': 0.5, '0':0, '2':2, '.':1})
+dfti = dfti.replace({'1': 0.5, '0':0.25, '2':2, '.':1})
 
 dfti
 
-#%%Ahhh team rocket is threatening me with water!!!
-
-water_attack = dfti.loc['water']
-water_defense = dfti['water']
-
-
-water_attack[water_attack < 1].index.tolist()
-water_defense[water_defense > 1].index.tolist()
-
 #%%
 print("flush")
-#%%
-
-## I have a combined rock/water type with ground moves... who might I be good at challenging???
-
-#who is rock good at attacking?
-#who is water good at attacking?
-#who is water safe against?
-#who is rock safe against?
-#who are ground moves good against?
 
 #%%
 poke_type = "fire"
@@ -87,17 +69,43 @@ def get_vulnerable_to(poke_type):
     se_types = types[types>1.0]
     return se_types
 
-
-#%%
-
-get_super_effective('water')
-get_not_effective('water')
-get_resistant_to('water')
-get_vulnerable_to('water')
-
-#%%
-temp = get_super_effective('fairy')
+#%%  TESTING
+#temp = get_super_effective('fairy')
+temp = get_not_effective('fairy')
+#temp = get_resistant_to('fairy')
+#temp = get_vulnerable_to('fairy')
 for (ptype, pcoef) in temp.iteritems():
     print("{}x damage to {}".format(pcoef, ptype))
 #%%
+
+#Who does poke_type suck against
+def get_relative_power_chart(poke_type):
+    d_from = 1/dfti[poke_type.lower()]
+    d_to = dfti.loc[poke_type.lower()]
+    df = pd.concat([d_from, d_to], axis=1)
+    df.columns = ["d_from","d_to"]
+    df['relative_power'] = d_to * d_from
+    return df
+    
+def get_sucks_against(poke_type):
+    rp = get_relative_power_chart(poke_type)
+    return rp[rp.relative_power < 1].sort_values('relative_power', ascending=True)
+
+def get_excells_against(poke_type):
+    rp = get_relative_power_chart(poke_type)
+    return rp[rp.relative_power > 1].sort_values('relative_power', ascending=False)
+
+#%%
+    
+#temp = get_relative_power_chart('fairy')
+temp = get_sucks_against('fairy')
+
+#%%
+print( "Fairy sucks against...")
+print( "type - damage from - damage to")
+
+for (ptype, (coef_to, coef_from, pr)) in temp.iterrows():
+    print("{} - {} - {}".format(ptype, coef_from, coef_to))
+    
+
 
