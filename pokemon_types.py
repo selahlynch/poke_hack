@@ -49,6 +49,10 @@ def say_hello():
     return "Pika!"
 
 #%%
+def get_poke_types():
+    return type_names_data
+
+#%%
 def get_super_effective(poke_type):
     types = dfti.loc[poke_type.lower()]
     se_types = types[types>1.0]

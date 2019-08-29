@@ -1,0 +1,41 @@
+<!doctype html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choose a Poke Type!</title>
+
+<body>
+<h1>Choose a Poke Type!</h1>
+
+
+
+
+<form action="/show_poke_types" method="post">
+
+  <div>
+  <label for="ptype-select">Choose a poke type:</label>
+  <select id="ptype-select" name="ptype-select">
+    <option value="">--select--</option>
+    {% for poke_type in poke_types %}
+      <option value="{{ poke_type }}">{{ poke_type }}</option>
+    {% endfor %}
+  </select>
+  </div>
+
+  <br/>
+
+  <div>
+  <label for="ptype2-select">Choose a 2nd poke type:</label>
+  <select id="ptype2-select">
+    <option value="">--select--</option>
+    {% for poke_type in poke_types %}
+      <option value="{{ poke_type }}">{{ poke_type }}</option>
+    {% endfor %}
+  </select>
+  </div>
+
+  <div class="button">
+    <button type="submit">Send your message</button>
+  </div>
+</form>
+
+
+</body>

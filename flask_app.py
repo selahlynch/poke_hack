@@ -2,20 +2,31 @@
 # A very simple Flask Hello World app for you to get started with...
 # https://flask.palletsprojects.com/en/1.1.x/quickstart/#quickstart
 
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for, request
 import pokemon_types
 
 app = Flask(__name__)
 
 @app.route('/')
 def hello_world(name = None):
-    return render_template('hello.html', name=name)
+    return redirect(url_for('choose_poke_type'))
 
 @app.route('/choose_poke_type')
 def choose_poke_type():
-    poke_types = "Normal Fire Water Electric Grass Ice Fighting Poison Ground Flying Psychic Bug Rock Ghost Dragon Dark Steel Fairy".split()
-#    poke_types = poke_hack.get_poke_types()
+    poke_types = pokemon_types.get_poke_types()
     return render_template('choose_poke_type.html', poke_types=poke_types)
+
+@app.route('/choose_poke_types')
+def choose_poke_types():
+    poke_types = pokemon_types.get_poke_types()
+    return render_template('choose_poke_types.html', poke_types=poke_types)
+
+@app.route('/show_poke_types', methods=['GET', 'POST'])
+def show_poke_types():
+    print(request.form['ptype-select'])
+    poke_type = request.form['ptype-select']
+    return render_template('show_poke_types.html', poke_type=poke_type)
+
 
 @app.route('/poke_type_deets/<poke_type>')
 def poke_type_deets(poke_type):
