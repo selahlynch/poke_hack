@@ -7,25 +7,31 @@ import pokemon_types
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def hello_world(name = None):
     return redirect(url_for('choose_poke_type'))
+
 
 @app.route('/choose_poke_type')
 def choose_poke_type():
     poke_types = pokemon_types.get_poke_types()
     return render_template('choose_poke_type.html', poke_types=poke_types)
 
+
 @app.route('/choose_poke_types')
 def choose_poke_types():
     poke_types = pokemon_types.get_poke_types()
     return render_template('choose_poke_types.html', poke_types=poke_types)
 
-@app.route('/show_poke_types', methods=['GET', 'POST'])
+
+@app.route('/show_poke_types', methods=['POST'])
 def show_poke_types():
     print(request.form['ptype-select'])
-    poke_type = request.form['ptype-select']
-    return render_template('show_poke_types.html', poke_type=poke_type)
+    poke_types = []
+    poke_types.append(request.form['ptype-select'])
+    poke_types.append(request.form['ptype2-select'])
+    return render_template('show_poke_types.html', poke_types=poke_types)
 
 
 @app.route('/poke_type_deets/<poke_type>')

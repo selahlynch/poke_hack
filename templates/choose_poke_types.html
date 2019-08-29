@@ -24,7 +24,7 @@
 
   <div>
   <label for="ptype2-select">Choose a 2nd poke type:</label>
-  <select id="ptype2-select">
+  <select id="ptype2-select" name="ptype2-select">
     <option value="">--select--</option>
     {% for poke_type in poke_types %}
       <option value="{{ poke_type }}">{{ poke_type }}</option>
