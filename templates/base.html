@@ -8,44 +8,15 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Choose a Poke Type!</title>
+    <title>Poke Hack!</title>
   </head>
 
 
-
-
-
-<body>
-    <h1>Choose a Poke Type!</h1>
-
-    <form action="/show_poke_types" method="post">
+    <body>
     
-      <div>
-      <label for="ptype-select">Choose a poke type:</label>
-      <select id="ptype-select" name="ptype-select">
-        <option value="">--select--</option>
-        {% for poke_type in poke_types %}
-          <option value="{{ poke_type }}">{{ poke_type }}</option>
-        {% endfor %}
-      </select>
-      </div>
-    
-      <br/>
-    
-      <div>
-      <label for="ptype2-select">Choose a 2nd poke type:</label>
-      <select id="ptype2-select" name="ptype2-select">
-        <option value="">--select--</option>
-        {% for poke_type in poke_types %}
-          <option value="{{ poke_type }}">{{ poke_type }}</option>
-        {% endfor %}
-      </select>
-      </div>
-    
-      <div class="button">
-        <button type="submit">Send your message</button>
-      </div>
-    </form>
+    <section class="content">
+      {% block content %}{% endblock %}
+    </section>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
