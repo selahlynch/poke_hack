@@ -37,6 +37,9 @@ dfti = dfti.replace({'1': 0.5, '0':0.25, '2':2, '.':1})
 dfti
 
 #%%
+dfti.to_csv("/data1/home/selah/pokemon_type_chart.csv")
+
+#%%
 print("flush")
 
 #%%
