@@ -101,11 +101,11 @@ def get_relative_power_chart(poke_type1, poke_type2=None, attack_type=None):
     
 def get_sucks_against(poke_type1, poke_type2=None, attack_type=None):
     rp = get_relative_power_chart(poke_type1, poke_type2, attack_type)
-    return rp[rp.relative_power < 1].sort_values('relative_power', ascending=True)
+    return rp[rp.relative_power < 1].sort_values(['relative_power', 'defence'], ascending=True)
 
 def get_excells_against(poke_type1, poke_type2=None, attack_type=None):
     rp = get_relative_power_chart(poke_type1, poke_type2, attack_type)
-    return rp[rp.relative_power > 1].sort_values('relative_power', ascending=False)
+    return rp[rp.relative_power > 1].sort_values(['relative_power', 'defence'], ascending=False)
 
 #%%
     
