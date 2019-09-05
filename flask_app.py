@@ -31,6 +31,24 @@ def show_poke_types():
     return render_template('show_poke_types.html', poke_types=poke_types)
 
 
+@app.route('/poke_types_deets', methods=['POST'])
+def poke_types_deets():
+    #TODO - get the strengths and weaknesses of this poke types
+    poke_deets = {}
+    poke_types = []
+    poke_types.append(request.form['ptype1-select'])
+    poke_types.append(request.form['ptype2-select'])
+    poke_types.append(request.form['ptype3-select'])
+    poke_type = ':'.join(poke_types)
+    
+    if poke_types[1] == '--select--':
+        poke_types[1] = None
+    
+    poke_deets['sucks_against'] = pokemon_types.get_sucks_against(poke_types[0],poke_types[1],poke_types[2])
+    poke_deets['excells_against'] = pokemon_types.get_excells_against(poke_types[0],poke_types[1],poke_types[2])
+    return render_template('poke_type_deets.html', poke_type=poke_type, poke_deets=poke_deets)#, poke_deets=poke_deets)
+
+
 @app.route('/poke_type_deets/<poke_type>')
 def poke_type_deets(poke_type):
     #TODO - get the strengths and weaknesses of this poke types
