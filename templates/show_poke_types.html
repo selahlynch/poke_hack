@@ -1,8 +1,7 @@
-<!doctype html>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Choose a Poke Type!</title>
+{% extends "base.html" %}
 
-<body>
-<h1>You chose {{poke_types[0]}} and {{poke_types[1]}} types!</h1>
+{% block content %}
+    <h1>You chose {{poke_types[0]}}/{{poke_types[1]}} type with a {{poke_types[3]}} attack!!!</h1>
+{% endblock %}
 
-</body>
+

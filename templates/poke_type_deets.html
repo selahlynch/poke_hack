@@ -1,51 +1,51 @@
-<!doctype html>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<head>
-<title>Deets for {{ poke_type }}!</title>
-</head>
+{% extends "base.html" %}
 
-<body>
-<h1>Deets for {{ poke_type }}!</h1>
+{% block content %}
+    <h1>Deets for {{ poke_type }}!</h1>
+    
+    <h2>{{ poke_type }} sucks against...</h2>
+    
+    <table border=1>
+      <tr>
+        <th>Type</th>
+        <th>Defending</th> 
+        <th>Attacking</th>
+      </tr>
+    
+      {% for (ptype, (coef_to, coef_from, pr)) in poke_deets['sucks_against'].iterrows(): %}
+      <tr>
+        <td><a href=/poke_type_deets/{{ptype}}>{{ptype}}</a></td>
+        <td>{{coef_to}}x</td> 
+        <td>{{coef_from}}x</td>
+      </tr>
+      {% endfor %}
+    </table>
+    
+    
+    <h2>{{ poke_type }} excells against...</h2>
+    
+    <table border=1>
+      <tr>
+        <th>Type</th>
+        <th>Defending</th> 
+        <th>Attacking</th>
+      </tr>
+    
+      {% for (ptype, (coef_to, coef_from, pr)) in poke_deets['excells_against'].iterrows(): %}
+      <tr>
+        <td><a href=/poke_type_deets/{{ptype}}>{{ptype}}</a></td>
+        <td>{{coef_to}}x</td> 
+        <td>{{coef_from}}x</td>
+      </tr>
+      {% endfor %}
+    </table>
+    
+    <h2><a href='/choose_poke_type'>Choose Another Type </a></h2>
+{% endblock %}
 
 
-<h2>{{ poke_type }} sucks against...</h2>
-
-<table border=1>
-  <tr>
-    <th>Type</th>
-    <th>Defending</th> 
-    <th>Attacking</th>
-  </tr>
-
-  {% for (ptype, (coef_to, coef_from, pr)) in poke_deets['sucks_against'].iterrows(): %}
-  <tr>
-    <td><a href=/poke_type_deets/{{ptype}}>{{ptype}}</a></td>
-    <td>{{coef_to}}x</td> 
-    <td>{{coef_from}}x</td>
-  </tr>
-  {% endfor %}
-</table>
 
 
-<h2>{{ poke_type }} excells against...</h2>
 
-<table border=1>
-  <tr>
-    <th>Type</th>
-    <th>Defending</th> 
-    <th>Attacking</th>
-  </tr>
 
-  {% for (ptype, (coef_to, coef_from, pr)) in poke_deets['excells_against'].iterrows(): %}
-  <tr>
-    <td><a href=/poke_type_deets/{{ptype}}>{{ptype}}</a></td>
-    <td>{{coef_to}}x</td> 
-    <td>{{coef_from}}x</td>
-  </tr>
-  {% endfor %}
-</table>
-
-<h2><a href='/choose_poke_type'>Choose Another Type </a></h2>
-
-</body>
 
