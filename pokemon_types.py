@@ -88,6 +88,7 @@ def get_relative_power_chart(poke_type1, poke_type2=None, attack_type=None):
             same_type_bonus = True
     else:
         attack_type = poke_type1
+        same_type_bonus = None
     
     dmg_to = dfti.loc[attack_type.lower()]
     if same_type_bonus:

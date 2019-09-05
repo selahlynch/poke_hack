@@ -43,6 +43,8 @@ def poke_types_deets():
     
     if poke_types[1] == '--select--':
         poke_types[1] = None
+    if poke_types[2] == '--select--':
+        poke_types[2] = None
     
     poke_deets['sucks_against'] = pokemon_types.get_sucks_against(poke_types[0],poke_types[1],poke_types[2])
     poke_deets['excells_against'] = pokemon_types.get_excells_against(poke_types[0],poke_types[1],poke_types[2])
