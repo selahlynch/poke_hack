@@ -6,20 +6,32 @@
     <form action="/show_poke_types" method="post">
     
       <div>
-      <label for="ptype-select">Choose a poke type:</label>
-      <select id="ptype-select" name="ptype-select">
+      <label for="ptype1-select">
+          My pokemon is type
+      </label>
+      <select id="ptype1-select" name="ptype1-select">
         <option value="">--select--</option>
         {% for poke_type in poke_types %}
           <option value="{{ poke_type }}">{{ poke_type }}</option>
         {% endfor %}
       </select>
-      </div>
-    
-      <br/>
-    
-      <div>
-      <label for="ptype2-select">Choose a 2nd poke type:</label>
+      
+      <label for="ptype2-select">and</label>
       <select id="ptype2-select" name="ptype2-select">
+        <option value="">--select--</option>
+        {% for poke_type in poke_types %}
+          <option value="{{ poke_type }}">{{ poke_type }}</option>
+        {% endfor %}
+      </select>
+
+      </div>
+      
+      <div>
+      </div>
+
+      <div>
+      <label for="ptype3-select">With an attack of type</label>
+      <select id="ptype3-select" name="ptype3-select">
         <option value="">--select--</option>
         {% for poke_type in poke_types %}
           <option value="{{ poke_type }}">{{ poke_type }}</option>

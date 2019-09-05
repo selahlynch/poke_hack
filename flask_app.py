@@ -1,7 +1,4 @@
 
-# A very simple Flask Hello World app for you to get started with...
-# https://flask.palletsprojects.com/en/1.1.x/quickstart/#quickstart
-
 from flask import Flask, render_template, redirect, url_for, request
 import pokemon_types
 
@@ -27,10 +24,10 @@ def choose_poke_types():
 
 @app.route('/show_poke_types', methods=['POST'])
 def show_poke_types():
-    print(request.form['ptype-select'])
     poke_types = []
-    poke_types.append(request.form['ptype-select'])
+    poke_types.append(request.form['ptype1-select'])
     poke_types.append(request.form['ptype2-select'])
+    poke_types.append(request.form['ptype3-select'])
     return render_template('show_poke_types.html', poke_types=poke_types)
 
 

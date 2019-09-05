@@ -37,26 +37,17 @@ dfti = dfti.replace({'1': 0.5, '0':0.25, '2':2, '.':1})
 dfti
 
 #%%
-dfti.to_csv("/data1/home/selah/pokemon_type_chart.csv")
+#dfti.to_csv("/data1/home/selah/pokemon_type_chart.csv")
 
 #%%
 print("flush")
-
-#%%
-poke_type = "fire"
-poke_type
-
-
-#%%
-def say_hello():
-    return "Pika!"
 
 #%%
 def get_poke_types():
     return type_names_data
 
 #%%
-def get_super_effective(poke_type):
+def get_super_effective(poke_type): #{{poke_type}} is super effective against ...
     types = dfti.loc[poke_type.lower()]
     se_types = types[types>1.0]
     return se_types
@@ -66,53 +57,70 @@ def get_not_effective(poke_type):
     se_types = types[types<1.0]
     return se_types
 
-def get_resistant_to(poke_type):  #I am resistant to water OR water is resistant to me
+def get_resistant_to(poke_type):
     types = dfti[poke_type.lower()]
     se_types = types[types<1.0]
     return se_types
 
-def get_vulnerable_to(poke_type):
+def get_vulnerable_to(poke_type): #{{poke_type}} is vulnerable to ...
     types = dfti[poke_type.lower()]
     se_types = types[types>1.0]
     return se_types
 
 #%%  TESTING
 #temp = get_super_effective('fairy')
-temp = get_not_effective('fairy')
+get_not_effective('fairy')
 #temp = get_resistant_to('fairy')
 #temp = get_vulnerable_to('fairy')
-for (ptype, pcoef) in temp.iteritems():
-    print("{}x damage to {}".format(pcoef, ptype))
 #%%
 
 #Who does poke_type suck against
-def get_relative_power_chart(poke_type):
-    d_from = 1/dfti[poke_type.lower()]
-    d_to = dfti.loc[poke_type.lower()]
-    df = pd.concat([d_from, d_to], axis=1)
-    df.columns = ["d_from","d_to"]
-    df['relative_power'] = d_to * d_from
+def get_relative_power_chart(poke_type1, poke_type2=None, attack_type=None):
+    dmg_from = 1/dfti[poke_type1.lower()]
+    
+    if poke_type2:
+        dmg_from2 = 1/dfti[poke_type2.lower()]
+        dmg_from = dmg_from*dmg_from2
+    
+    same_type_bonus = None
+    if attack_type:
+        if attack_type == poke_type1:
+            same_type_bonus = True
+    else:
+        attack_type = poke_type1
+    
+    dmg_to = dfti.loc[attack_type.lower()]
+    if same_type_bonus:
+        dmg_to = dmg_to * 1.2
+
+    df = pd.concat([dmg_from, dmg_to], axis=1)
+    df.columns = ["defence","attack"]
+    df['relative_power'] = dmg_to * dmg_from
     return df
     
-def get_sucks_against(poke_type):
-    rp = get_relative_power_chart(poke_type)
+def get_sucks_against(poke_type1, poke_type2=None, attack_type=None):
+    rp = get_relative_power_chart(poke_type1, poke_type2, attack_type)
     return rp[rp.relative_power < 1].sort_values('relative_power', ascending=True)
 
-def get_excells_against(poke_type):
-    rp = get_relative_power_chart(poke_type)
+def get_excells_against(poke_type1, poke_type2=None, attack_type=None):
+    rp = get_relative_power_chart(poke_type1, poke_type2, attack_type)
     return rp[rp.relative_power > 1].sort_values('relative_power', ascending=False)
 
 #%%
     
-#temp = get_relative_power_chart('fairy')
-temp = get_sucks_against('fairy')
+get_relative_power_chart('fairy')
+get_sucks_against('fairy')
+
+get_excells_against('fire', None, 'electric') #growlithe
+
+get_excells_against('fire') #unspecified attack
+get_excells_against('fire', None, 'fire') #with attack specified
+
+get_relative_power_chart('bug').sort_values('relative_power', ascending=False)
+
 
 #%%
-print( "Fairy sucks against...")
-print( "type - damage from - damage to")
 
-for (ptype, (coef_to, coef_from, pr)) in temp.iterrows():
-    print("{} - {} - {}".format(ptype, coef_from, coef_to))
-    
+
 
 
