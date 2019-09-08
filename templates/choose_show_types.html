@@ -2,6 +2,84 @@
 
 {% block content %}
 
-Gonna choose and show types
+    <form action="/choose_show_types" method="post">
+    
+      <div>
+      <label for="ptype1-select">
+          My pokemon is type
+      </label>
+      <select id="ptype1-select" name="ptype1-select">
+        <option value="">--select--</option>
+        {% for poke_type in poke_types %}
+          <option value="{{ poke_type }}">{{ poke_type }}</option>
+        {% endfor %}
+      </select>
+      
+      <label for="ptype2-select">and</label>
+      <select id="ptype2-select" name="ptype2-select">
+        <option value="">--select--</option>
+        {% for poke_type in poke_types %}
+          <option value="{{ poke_type }}">{{ poke_type }}</option>
+        {% endfor %}
+      </select>
+
+      </div>
+            
+      <div>
+      <label for="pattack1-select">With an attack of type</label>
+      <select id="pattack1-select" name="pattack1-select">
+        <option value="">--select--</option>
+        {% for poke_type in poke_types %}
+          <option value="{{ poke_type }}">{{ poke_type }}</option>
+        {% endfor %}
+      </select>
+      </div>
+    
+      <div class="button">
+        <button type="submit">Show deets</button>
+      </div>
+    </form>
+
+    {% if request.method == 'POST' %}
+
+    <h2>{{ poke_type_selection }} sucks against...</h2>
+    
+    <table border=1>
+      <tr>
+        <th>Type</th>
+        <th>Defending</th> 
+        <th>Attacking</th>
+      </tr>
+    
+      {% for (ptype, (coef_to, coef_from, pr)) in poke_deets['sucks_against'].iterrows(): %}
+      <tr>
+        <td><a href=/poke_type_deets/{{ptype}}>{{ptype}}</a></td>
+        <td>{{coef_to}}x</td> 
+        <td>{{coef_from}}x</td>
+      </tr>
+      {% endfor %}
+    </table>
+    
+    
+    <h2>{{ poke_type_selection }} excells against...</h2>
+    
+    <table border=1>
+      <tr>
+        <th>Type</th>
+        <th>Defending</th> 
+        <th>Attacking</th>
+      </tr>
+    
+      {% for (ptype, (coef_to, coef_from, pr)) in poke_deets['excells_against'].iterrows(): %}
+      <tr>
+        <td><a href=/poke_type_deets/{{ptype}}>{{ptype}}</a></td>
+        <td>{{coef_to}}x</td> 
+        <td>{{coef_from}}x</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    {% endif %}
+
 
 {% endblock %}

@@ -10,16 +10,37 @@ def hello_world(name = None):
     return redirect(url_for('choose_poke_type'))
 
 
-
 @app.route('/choose_show_types', methods=['GET', 'POST'])
 def choose_show_types():
-    #dropdowns to choose types
-    #display previously chosen types
-    #tables to display type strengths/weaknesses
+
+    print("Begin show types")
     
-    #first do it as we know how to... then
-    pass
-    
+    poke_types = pokemon_types.get_poke_types()
+
+    poke_type_selection = ''
+    poke_type_selections = []
+    poke_deets = {}
+    if request.method == 'POST':
+ 
+        print("Begin Get post values")
+        poke_type_selections.append(request.form['ptype1-select'])
+        poke_type_selections.append(request.form['ptype2-select'])
+        poke_type_selections.append(request.form['pattack1-select'])
+        poke_type_selection = ':'.join(poke_type_selections)
+        print("End Get post values")
+        
+        if poke_type_selections[1] == '--select--':
+            poke_type_selections[1] = None
+        if poke_type_selections[2] == '--select--':
+            poke_type_selections[2] = None
+        
+        poke_deets['sucks_against'] = pokemon_types.get_sucks_against(poke_type_selections[0],poke_type_selections[1],poke_type_selections[2])
+        poke_deets['excells_against'] = pokemon_types.get_excells_against(poke_type_selections[0],poke_type_selections[1],poke_type_selections[2])
+
+
+    print("End show types")
+
+    return render_template('choose_show_types.html', poke_types=poke_types, poke_type_selection=poke_type_selection, poke_deets=poke_deets)
     
 
 @app.route('/choose_poke_type')
