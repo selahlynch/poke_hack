@@ -11,7 +11,12 @@
       <select id="ptype1-select" name="ptype1-select">
         <option value="">--select--</option>
         {% for poke_type in poke_types %}
-          <option value="{{ poke_type }}">{{ poke_type }}</option>
+          <option 
+              {% if request.method == 'POST' and poke_type == poke_type_selections[0] %}
+                  selected="selected" 
+              {% endif %}
+              value="{{ poke_type }}">{{ poke_type }}
+          </option>
         {% endfor %}
       </select>
       
@@ -19,7 +24,12 @@
       <select id="ptype2-select" name="ptype2-select">
         <option value="">--select--</option>
         {% for poke_type in poke_types %}
-          <option value="{{ poke_type }}">{{ poke_type }}</option>
+          <option 
+              {% if request.method == 'POST' and poke_type == poke_type_selections[1] %}
+                  selected="selected" 
+              {% endif %}
+              value="{{ poke_type }}">{{ poke_type }}
+          </option>
         {% endfor %}
       </select>
 
@@ -30,7 +40,12 @@
       <select id="pattack1-select" name="pattack1-select">
         <option value="">--select--</option>
         {% for poke_type in poke_types %}
-          <option value="{{ poke_type }}">{{ poke_type }}</option>
+          <option 
+              {% if request.method == 'POST' and poke_type == poke_type_selections[2] %}
+                  selected="selected" 
+              {% endif %}
+              value="{{ poke_type }}">{{ poke_type }}
+          </option>
         {% endfor %}
       </select>
       </div>

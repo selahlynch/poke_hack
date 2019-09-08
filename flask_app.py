@@ -40,7 +40,7 @@ def choose_show_types():
 
     print("End show types")
 
-    return render_template('choose_show_types.html', poke_types=poke_types, poke_type_selection=poke_type_selection, poke_deets=poke_deets)
+    return render_template('choose_show_types.html', poke_types=poke_types, poke_type_selections=poke_type_selections, poke_type_selection=poke_type_selection, poke_deets=poke_deets)
     
 
 @app.route('/choose_poke_type')
