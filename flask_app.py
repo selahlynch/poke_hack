@@ -10,6 +10,18 @@ def hello_world(name = None):
     return redirect(url_for('choose_poke_type'))
 
 
+
+@app.route('/choose_show_types', methods=['GET', 'POST'])
+def choose_show_types():
+    #dropdowns to choose types
+    #display previously chosen types
+    #tables to display type strengths/weaknesses
+    
+    #first do it as we know how to... then
+    pass
+    
+    
+
 @app.route('/choose_poke_type')
 def choose_poke_type():
     poke_types = pokemon_types.get_poke_types()
