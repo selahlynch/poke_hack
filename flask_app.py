@@ -37,31 +37,15 @@ def choose_show_types():
         poke_deets['sucks_against'] = pokemon_types.get_sucks_against(poke_type_selections[0],poke_type_selections[1],poke_type_selections[2])
         poke_deets['excells_against'] = pokemon_types.get_excells_against(poke_type_selections[0],poke_type_selections[1],poke_type_selections[2])
 
-
     print("End show types")
 
     return render_template('choose_show_types.html', poke_types=poke_types, poke_type_selections=poke_type_selections, poke_type_selection=poke_type_selection, poke_deets=poke_deets)
     
 
-@app.route('/choose_poke_type')
-def choose_poke_type():
-    poke_types = pokemon_types.get_poke_types()
-    return render_template('choose_poke_type.html', poke_types=poke_types)
-
-
 @app.route('/choose_poke_types')
 def choose_poke_types():
     poke_types = pokemon_types.get_poke_types()
     return render_template('choose_poke_types.html', poke_types=poke_types)
-
-
-@app.route('/show_poke_types', methods=['POST'])
-def show_poke_types():
-    poke_types = []
-    poke_types.append(request.form['ptype1-select'])
-    poke_types.append(request.form['ptype2-select'])
-    poke_types.append(request.form['ptype3-select'])
-    return render_template('show_poke_types.html', poke_types=poke_types)
 
 
 @app.route('/poke_types_deets', methods=['POST'])
