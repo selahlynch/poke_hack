@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world(name = None):
-    return redirect(url_for('choose_poke_type'))
+    return redirect(url_for('choose_show_types'))
 
 
 @app.route('/choose_show_types', methods=['GET', 'POST'])
