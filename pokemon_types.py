@@ -84,7 +84,7 @@ def get_relative_power_chart(poke_type1, poke_type2=None, attack_type=None):
     
     same_type_bonus = None
     if attack_type:
-        if attack_type == poke_type1:
+        if attack_type == poke_type1 or attack_type == poke_type2:
             same_type_bonus = True
     else:
         attack_type = poke_type1
