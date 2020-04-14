@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    {% for poke_type in poke_types %}
+      <a href="/poke_type_deets/{{ poke_type }}">
+      <img src="static/{{poke_german[poke_type]}}.png" width=30>
+      {{ poke_type }}
+  	  </a><br/>
+    {% endfor %}
+
+    <br/>
+    <a href="choose_show_types"> Advanced </a>
+
+{% endblock %}

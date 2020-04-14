@@ -7,7 +7,31 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world(name = None):
-    return redirect(url_for('choose_show_types'))
+    return redirect(url_for('landing'))
+
+@app.route('/landing', methods=['GET'])
+def landing():
+    poke_types = pokemon_types.get_poke_types()
+    poke_german = {}
+    poke_german['ground'] = 'boden'
+    poke_german['dragon'] = 'drache'
+    poke_german['ice'] = 'eis'
+    poke_german['electric'] = 'elektro'
+    poke_german['fairy'] = 'fee'
+    poke_german['fire'] = 'feuer'
+    poke_german['flying'] = 'flug'
+    poke_german['ghost'] = 'geist'
+    poke_german['rock'] = 'gestein'
+    poke_german['poison'] = 'gift'
+    poke_german['bug'] = 'kafer'
+    poke_german['fighting'] = 'kampf'
+    poke_german['normal'] = 'normal'
+    poke_german['grass'] = 'pflanze'
+    poke_german['psychic'] = 'psychic'
+    poke_german['steel'] = 'stahl'
+    poke_german['dark'] = 'unlicht'
+    poke_german['water'] = 'wasser'
+    return render_template('landing.html', poke_types=poke_types, poke_german=poke_german)
 
 
 @app.route('/choose_show_types', methods=['GET', 'POST'])
@@ -41,12 +65,6 @@ def choose_show_types():
 
     return render_template('choose_show_types.html', poke_types=poke_types, poke_type_selections=poke_type_selections, poke_type_selection=poke_type_selection, poke_deets=poke_deets)
     
-
-@app.route('/choose_poke_types')
-def choose_poke_types():
-    poke_types = pokemon_types.get_poke_types()
-    return render_template('choose_poke_types.html', poke_types=poke_types)
-
 
 @app.route('/poke_types_deets', methods=['POST'])
 def poke_types_deets():
